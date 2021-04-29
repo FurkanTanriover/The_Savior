@@ -65,11 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Follower.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\Patrol.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\RayViewer.cs" />
-    <Compile Include="Assets\Scripts\Scenes\Follower.cs" />
-    <Compile Include="Assets\Scripts\Scenes\Patrol.cs" />
+    <Compile Include="Assets\Scripts\Scope.cs" />
     <Compile Include="Assets\Scripts\Shoot.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
