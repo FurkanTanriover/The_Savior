@@ -29,7 +29,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+        if (Input.GetMouseButtonUp(0) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
 
@@ -44,7 +44,7 @@ public class Shoot : MonoBehaviour
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange))
             {
                 laserLine.SetPosition(1, hit.point);
-                Enemy health = hit.collider.GetComponent<Enemy>();
+                Enemy health = hit.collider.transform.parent.GetComponent<Enemy>();
                 if (health != null)
                 {
                     health.Damage(gunDamage);

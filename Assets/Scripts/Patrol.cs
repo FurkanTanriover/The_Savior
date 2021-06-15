@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
-    public Transform[] points;
+    /*public Transform[] points;
     private int destPoint = 0;
     private NavMeshAgent agent;
 
@@ -22,6 +22,15 @@ public class Patrol : MonoBehaviour
         GotoNextPoint();
     }
 
+
+    private void OntriggerEnter(Collider coll)
+    {
+        if (coll.CompareTag("EndArea"))
+        {
+            Debug.Log("AMMAR");
+            agent.enabled = false;
+        }
+    }
 
     void GotoNextPoint()
     {
@@ -45,6 +54,37 @@ public class Patrol : MonoBehaviour
         if (!agent.pathPending && agent.remainingDistance < 1.5f)
             GotoNextPoint();
 
+    }*/
+
+    [SerializeField]
+    private Transform endAreaTR;
+
+
+    private bool isCivilianGo = true;
+
+    private Animator anim;
+
+    private Vector3 endAreaVec3;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        endAreaVec3 = new Vector3(endAreaTR.position.x, transform.position.y, endAreaTR.position.z);
+    }
+
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.CompareTag("EndArea"))
+        {
+            anim.SetBool("FinishTarget", true);
+            isCivilianGo = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (isCivilianGo)
+            transform.position = Vector3.MoveTowards(transform.position, endAreaVec3, 3f * Time.deltaTime);
     }
 }
 

@@ -4,9 +4,26 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public ParticleSystem enemyDie;
-    public int currentHealth = 3;
-    public float deathTime;
+    public static event WinLoseScreen.WinEnemyAction EnemyDead;
+
+    private Animator anim;
+    public int currentHealth = 1;
+    public float deathTime = 5;
+
+
+    public void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.CompareTag("Civilian"))
+        {
+            anim.SetBool("EnemyMelee", true);
+             WinLoseScreen.Instance.Lose();
+        }
+    }
 
     public void Damage(int damageAmount)
     {
@@ -14,9 +31,15 @@ public class Enemy : MonoBehaviour
         currentHealth -= damageAmount;
         if (currentHealth <= 0)
         {
-            enemyDie.Play();
+            EnemyDead?.Invoke();
+            Death();
             Destroy(gameObject, deathTime);
         }
+    }
+
+    public void Death()
+    {
+        anim.SetTrigger("Death");
     }
 
 }
